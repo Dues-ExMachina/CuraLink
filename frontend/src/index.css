@@ -1,0 +1,268 @@
+/* ─── Google Fonts ─────────────────────────────────────────────── */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+
+@import "tailwindcss";
+
+/* ─────────────────────────────────────────────────────────────────
+   CuraLink Design System — Global CSS
+   ─────────────────────────────────────────────────────────────────
+   Built on Tailwind CSS v4 with CSS custom properties for theming.
+   Implements a deep dark medical aesthetic with cyan/teal accents.
+*/
+
+/* ─── Design Tokens (CSS Custom Properties) ────────────────────── */
+:root {
+  /* Color palette — medical dark theme */
+  --bg-base: #050810;
+  --bg-surface: #0d1117;
+  --bg-elevated: #161b25;
+  --bg-hover: #1e2535;
+
+  /* Brand colors — scientific cyan/teal */
+  --accent-primary: #00d2ff;
+  --accent-secondary: #7b2fff;
+  --accent-success: #00e5a0;
+  --accent-warning: #ffb347;
+  --accent-danger: #ff5c6b;
+
+  /* Text */
+  --text-primary: #e8eaf0;
+  --text-secondary: #8892a4;
+  --text-muted: #4a5568;
+
+  /* Borders */
+  --border-subtle: rgba(255, 255, 255, 0.06);
+  --border-default: rgba(255, 255, 255, 0.10);
+  --border-accent: rgba(0, 210, 255, 0.3);
+
+  /* Shadows */
+  --shadow-glow: 0 0 30px rgba(0, 210, 255, 0.12);
+  --shadow-card: 0 4px 24px rgba(0, 0, 0, 0.4);
+
+  /* Gradients */
+  --gradient-brand: linear-gradient(135deg, #00d2ff 0%, #7b2fff 100%);
+  --gradient-surface: linear-gradient(180deg, #0d1117 0%, #050810 100%);
+  --gradient-card: linear-gradient(135deg, rgba(13,17,23,0.9) 0%, rgba(22,27,37,0.9) 100%);
+}
+
+/* ─── Base Reset ────────────────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  background-color: var(--bg-base);
+  color: var(--text-primary);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+}
+
+/* ─── Scrollbar Styling ─────────────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-surface);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border-default);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-primary);
+}
+
+/* ─── Selection ─────────────────────────────────────────────────── */
+::selection {
+  background: rgba(0, 210, 255, 0.25);
+  color: var(--text-primary);
+}
+
+/* ─── Animations ─────────────────────────────────────────────────── */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideInLeft {
+  from { opacity: 0; transform: translateX(-16px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes slideInRight {
+  from { opacity: 0; transform: translateX(16px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 8px rgba(0, 210, 255, 0.3); }
+  50% { box-shadow: 0 0 24px rgba(0, 210, 255, 0.6); }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes typing-dot {
+  0%, 80%, 100% { transform: scale(0.7); opacity: 0.4; }
+  40% { transform: scale(1); opacity: 1; }
+}
+
+/* ─── Utility Classes ─────────────────────────────────────────────── */
+.fade-in { animation: fadeIn 0.3s ease forwards; }
+.slide-in-left { animation: slideInLeft 0.3s ease forwards; }
+.slide-in-right { animation: slideInRight 0.3s ease forwards; }
+
+/* Glassmorphism card */
+.glass-card {
+  background: var(--gradient-card);
+  border: 1px solid var(--border-default);
+  border-radius: 12px;
+  backdrop-filter: blur(12px);
+  transition: all 0.25s ease;
+}
+.glass-card:hover {
+  border-color: var(--border-accent);
+  box-shadow: var(--shadow-glow);
+  transform: translateY(-1px);
+}
+
+/* Gradient text */
+.gradient-text {
+  background: var(--gradient-brand);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Loading skeleton */
+.skeleton {
+  background: linear-gradient(90deg,
+    var(--bg-elevated) 25%,
+    var(--bg-hover) 50%,
+    var(--bg-elevated) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: 6px;
+}
+
+/* Glowing button */
+.btn-glow {
+  position: relative;
+  background: var(--gradient-brand);
+  border: none;
+  border-radius: 8px;
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+.btn-glow:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 25px rgba(0, 210, 255, 0.35);
+}
+.btn-glow:active {
+  transform: translateY(0);
+}
+
+/* Status badge */
+.badge-recruiting {
+  background: rgba(0, 229, 160, 0.15);
+  color: var(--accent-success);
+  border: 1px solid rgba(0, 229, 160, 0.3);
+}
+.badge-completed {
+  background: rgba(0, 210, 255, 0.12);
+  color: var(--accent-primary);
+  border: 1px solid rgba(0, 210, 255, 0.25);
+}
+.badge-pubmed {
+  background: rgba(255, 92, 107, 0.12);
+  color: #ff7b8a;
+  border: 1px solid rgba(255, 92, 107, 0.25);
+}
+.badge-openalex {
+  background: rgba(123, 47, 255, 0.12);
+  color: #a78bfa;
+  border: 1px solid rgba(123, 47, 255, 0.25);
+}
+
+/* Typing indicator dots */
+.typing-dot {
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  margin: 0 2px;
+  background: var(--accent-primary);
+  border-radius: 50%;
+  animation: typing-dot 1.2s infinite ease-in-out;
+}
+.typing-dot:nth-child(2) { animation-delay: 0.2s; }
+.typing-dot:nth-child(3) { animation-delay: 0.4s; }
+
+/* Prose styles for markdown rendered responses */
+.prose-response h2 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--accent-primary);
+  margin: 1.2rem 0 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.prose-response p {
+  color: var(--text-primary);
+  font-size: 0.925rem;
+  margin-bottom: 0.6rem;
+  line-height: 1.7;
+}
+
+.prose-response ul {
+  list-style: none;
+  padding: 0;
+  margin: 0.4rem 0 0.8rem;
+}
+
+.prose-response ul li {
+  position: relative;
+  padding-left: 1.4rem;
+  font-size: 0.9rem;
+  color: var(--text-primary);
+  margin-bottom: 0.45rem;
+  line-height: 1.6;
+}
+
+.prose-response ul li::before {
+  content: '▸';
+  position: absolute;
+  left: 0;
+  color: var(--accent-primary);
+  font-size: 0.75rem;
+  top: 0.15rem;
+}
+
+.prose-response strong {
+  color: var(--accent-primary);
+  font-weight: 600;
+}
+
+.prose-response a {
+  color: var(--accent-primary);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(0, 210, 255, 0.3);
+  transition: border-color 0.2s;
+}
+.prose-response a:hover { border-color: var(--accent-primary); }
