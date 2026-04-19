@@ -32,7 +32,13 @@ const HomePage = () => {
   // Wake up models on load
   useEffect(() => {
     let mounted = true;
-    axios.get('/api/health/wake')
+    
+    // Support both local dev (proxy) and production (absolute URL)
+    const apiBase = import.meta.env.VITE_API_URL 
+      ? `${import.meta.env.VITE_API_URL}/api` 
+      : '/api';
+
+    axios.get(`${apiBase}/health/wake`)
       .then(() => {
         if (mounted) setIsWaking(false);
       })

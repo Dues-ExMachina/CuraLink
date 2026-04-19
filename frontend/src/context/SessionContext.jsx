@@ -12,8 +12,10 @@ import axios from 'axios';
 
 const SessionContext = createContext(null);
 
-// Base API URL — uses Vite proxy in dev, or absolute URL in prod
-const API_BASE = '/api';
+// Base API URL — uses Vite proxy in dev, or absolute URL in prod from environment variables
+const API_BASE = import.meta.env.VITE_API_URL 
+  ? `${import.meta.env.VITE_API_URL}/api` 
+  : '/api';
 
 export const SessionProvider = ({ children }) => {
   // Current active session data
